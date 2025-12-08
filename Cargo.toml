@@ -1,0 +1,9 @@
+[package]
+name = "risc0-verifier-xrpl-wasm"
+version = "0.1.0"
+edition = "2024"
+description = "RISC Zero verifier for XRPL Wasm"
+license = "Apache-2.0"
+readme = "README.md"
+
+[dependencies]
