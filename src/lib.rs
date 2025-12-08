@@ -13,3 +13,23 @@
 // limitations under the License.
 
 #![doc = include_str!("../README.md")]
+#![cfg_attr(not(feature = "std"), no_std)]
+
+#[cfg(feature = "std")]
+extern crate std;
+
+pub mod groth16;
+pub mod risc0;
+
+pub use groth16::Proof;
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum Error {
+    InvalidProof,
+    InvalidClaimDigest,
+    ArithmeticError,
+    PairingCheckFailed,
+    ScalarNotInField,
+}
+
+pub type Result<T> = core::result::Result<T, Error>;

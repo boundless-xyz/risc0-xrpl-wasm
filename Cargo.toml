@@ -6,4 +6,29 @@ description = "RISC Zero verifier for XRPL Wasm"
 license = "Apache-2.0"
 readme = "README.md"
 
+[features]
+default = []
+std = []
+
+
 [dependencies]
+hex-literal = "1.1.0"
+sha2 = { version = "0.10", default-features = false }
+
+[target.'cfg(target_arch = "wasm32")'.dependencies]
+xrpl-wasm-std = { git = "https://github.com/ripple/craft", branch = "zhang/groth16" }
+
+[build-dependencies]
+risc0-circuit-recursion = { version = "4.0.2", default-features = false }
+
+############################################################################
+
+[workspace]
+
+members = [
+    ".",
+    "examples/verify_simple",
+]
+
+[workspace.dependencies]
+risc0-verifier-xrpl-wasm = { path = ".", default-features = false}

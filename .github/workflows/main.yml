@@ -58,9 +58,4 @@ jobs:
       - name: cargo clippy
         env:
           RUSTFLAGS: "-Dwarnings"
-          RISC0_SKIP_BUILD: 1
         run: cargo clippy --all --locked
-
-      - name: lint guest code
-        working-directory: methods/guest
-        run: cargo fmt --all --check∂
