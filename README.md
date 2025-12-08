@@ -4,7 +4,11 @@ This crate implements a stateless RISC Zero proof verifier, and generic Groth16 
 
 ## Usage
 
-Note the examples below will only work in an XRPL Wasm runtime environment or similar environment that provides host functions for BN254 operations
+Note the examples below will only work in an XRPL Wasm runtime environment or similar environment that provides host functions for BN254 operations.
+
+> [!IMPORTANT]
+> These precompiles are not supported by the current version of the xrpl-wasm runtime. Examples must currently be run against the host simulator 
+> from [this fork](https://github.com/ripple/craft/tree/zhang/groth16) of the (now deprecated) Craft repo
 
 ### Verify RISC0 proof
 

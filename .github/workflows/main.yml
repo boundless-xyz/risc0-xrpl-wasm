@@ -59,3 +59,28 @@ jobs:
         env:
           RUSTFLAGS: "-Dwarnings"
         run: cargo clippy --all --locked
+
+
+  test:
+    runs-on: [ self-hosted, prod, "${{ matrix.os }}", "${{ matrix.arch }}", "${{ matrix.device }}" ]
+    strategy:
+      matrix:
+        include:
+          - os: Linux
+            arch: X64
+            feature: default
+            device: cpu
+    steps:
+      - name: checkout code
+        uses: actions/checkout@v4
+
+      - name: install rust
+        uses: risc0/risc0/.github/actions/rustup@main
+
+      - name: add wasm32v1-none target
+        run: rustup target add wasm32v1-none
+
+      - name: cargo test
+        env:
+          RUSTFLAGS: "-Dwarnings"
+        run: cargo test --locked

@@ -1,0 +1,10 @@
+[package]
+name = "risc0_verify_simple"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+risc0-verifier-xrpl-wasm = { workspace = true, default-features = false }

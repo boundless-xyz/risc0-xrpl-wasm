@@ -21,14 +21,23 @@ xrpl-wasm-std = { git = "https://github.com/ripple/craft", branch = "zhang/groth
 [build-dependencies]
 risc0-circuit-recursion = { version = "4.0.2", default-features = false }
 
+[dev-dependencies]
+wasm-host-simulator = { git = "https://github.com/ripple/craft", branch = "zhang/groth16" }
+
 ############################################################################
 
 [workspace]
 
 members = [
     ".",
-    "examples/verify_simple",
+    "examples/risc0_verify_simple",
+    "examples/groth16_verify_simple",
 ]
 
 [workspace.dependencies]
 risc0-verifier-xrpl-wasm = { path = ".", default-features = false}
+
+[profile.release]
+opt-level = "s"
+lto = true
+panic = "abort"
