@@ -1664,6 +1664,7 @@ version = "0.1.0"
 dependencies = [
  "hex-literal 1.1.0",
  "risc0-circuit-recursion",
+ "serde_json",
  "sha2 0.10.9",
  "wasm-host-simulator",
  "xrpl-wasm-std",
@@ -1707,9 +1708,19 @@ dependencies = [
 ]
 
 [[package]]
+name = "risc0_verify_proof_from_memo"
+version = "0.1.0"
+dependencies = [
+ "hex-literal 1.1.0",
+ "risc0-verifier-xrpl-wasm",
+ "xrpl-wasm-std",
+]
+
+[[package]]
 name = "risc0_verify_simple"
 version = "0.1.0"
 dependencies = [
+ "hex-literal 1.1.0",
  "risc0-verifier-xrpl-wasm",
 ]
 

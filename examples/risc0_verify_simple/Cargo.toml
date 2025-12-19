@@ -7,4 +7,5 @@ edition = "2021"
 crate-type = ["cdylib"]
 
 [dependencies]
+hex-literal = "1.1.0"
 risc0-verifier-xrpl-wasm = { workspace = true, default-features = false }
