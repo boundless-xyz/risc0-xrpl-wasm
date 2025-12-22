@@ -50,7 +50,6 @@ pub fn get_memo<const LEN: usize>(idx: i32) -> Result<[u8; LEN]> {
     let mut locator = Locator::new();
     locator.pack(sfield::Memos);
     locator.pack(idx);
-    locator.pack(sfield::Memo);
     locator.pack(sfield::MemoData);
     let result_code = unsafe {
         get_tx_nested_field(
