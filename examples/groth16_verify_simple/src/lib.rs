@@ -18,6 +18,8 @@
 extern crate std;
 
 use risc0_verifier_xrpl_wasm::groth16::{verify_groth16, Proof, PublicInputs, VerificationKey};
+#[allow(unused)]
+use xrpl_wasm_stdlib;
 
 /// Verify a known-good Groth16 proof
 #[unsafe(no_mangle)]

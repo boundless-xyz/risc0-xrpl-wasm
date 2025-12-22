@@ -18,6 +18,8 @@
 extern crate std;
 
 use risc0_verifier_xrpl_wasm::{risc0, Proof};
+#[allow(unused)]
+use xrpl_wasm_stdlib;
 
 const IMAGE_ID: [u8; 32] =
     hex_literal::hex!("81bb1005c513528e282e3c54059a7d0cd126e45a0fab86b31f1c5a6ffb6f7190");

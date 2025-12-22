@@ -18,9 +18,9 @@
 extern crate std;
 
 use risc0_verifier_xrpl_wasm::{risc0, Proof};
-use xrpl_wasm_std::host::trace::{trace_data, DataRepr};
-use xrpl_wasm_std::host::{Error, Result, Result::Err, Result::Ok};
-use xrpl_wasm_std::{core::locator::Locator, host::get_tx_nested_field, sfield};
+use xrpl_wasm_stdlib::host::trace::{trace_data, DataRepr};
+use xrpl_wasm_stdlib::host::{Error, Result, Result::Err, Result::Ok};
+use xrpl_wasm_stdlib::{core::locator::Locator, host::get_tx_nested_field, sfield};
 
 // Commit to the image ID inside the wasm code. This constrains the zkVM program that this escrow will allow proofs from.
 // NOTE: This must be updated if you change/rebuild the RISC0 zkVM guest code
