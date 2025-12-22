@@ -18,10 +18,11 @@
 extern crate std;
 
 use risc0_verifier_xrpl_wasm::{risc0, Proof};
-use xrpl_wasm_std::host::trace::{trace_data, trace_num, DataRepr};
+use xrpl_wasm_std::host::trace::{trace_data, DataRepr};
 use xrpl_wasm_std::host::{Error, Result, Result::Err, Result::Ok};
 use xrpl_wasm_std::{core::locator::Locator, host::get_tx_nested_field, sfield};
 
+// Commit to the image ID inside the wasm code. This constrains the zkVM program that this escrow will allow proofs from.
 // NOTE: This must be updated if you change/rebuild the RISC0 zkVM guest code
 const IMAGE_ID: [u8; 32] =
     hex_literal::hex!("81bb1005c513528e282e3c54059a7d0cd126e45a0fab86b31f1c5a6ffb6f7190");
@@ -29,13 +30,7 @@ const IMAGE_ID: [u8; 32] =
 /// Verify a RISC0 proof retrieved from the data of the first memo in the transaction
 #[unsafe(no_mangle)]
 pub extern "C" fn finish() -> i32 {
-    let seal: [u8; 256] = match get_memo(0) {
-        Ok(v) => v,
-        Err(e) => {
-            let _ = trace_num("Error getting proof from memo:", e.code() as i64);
-            return e.code(); // <-- Do not execute the escrow.
-        }
-    };
+    let seal: [u8; 256] = get_memo(0).unwrap();
     trace_data("received seal", &seal, DataRepr::AsHex).unwrap();
 
     let proof = Proof::from_seal_bytes(&seal).unwrap();
