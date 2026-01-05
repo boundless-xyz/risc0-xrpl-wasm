@@ -1716,6 +1716,7 @@ dependencies = [
 name = "risc0-verifier-xrpl-wasm"
 version = "0.1.0"
 dependencies = [
+ "anyhow",
  "hex",
  "hex-literal 1.1.0",
  "risc0-circuit-recursion",

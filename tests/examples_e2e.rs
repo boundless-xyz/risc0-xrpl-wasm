@@ -47,7 +47,7 @@ fn create_escrow(
     from: &str,
     from_secret: &str,
     to: &str,
-) -> u64 {
+) -> anyhow::Result<u64> {
     let wasm = std::fs::read(wasm_path).expect("Failed to read wasm file");
 
     let val_ledger = handle
@@ -61,46 +61,49 @@ fn create_escrow(
         "TransactionType": "EscrowCreate",
         "Account": from,
         "Destination": to,
-        "Amount": "1000000",
-        "CancelAfter": close_time + 10000,
-        "Data": "70000000",
-        "FinishFunction": "0061736D01000000010E0260057F7F7F7F7F017F6000017F02120108686F73745F6C696205747261636500000302010105030100110619037F01418080C0000B7F00418C80C0000B7F00419080C0000B072E04066D656D6F727902000666696E69736800010A5F5F646174615F656E6403010B5F5F686561705F6261736503020A1B011900418080C08000410C4101410041001080808080001A41010B0B150100418080C0000B0C48656C6C6F20576F726C6421009101046E616D6500111068656C6C6F5F776F726C642E7761736D015702004C5F5A4E31367872706C5F7761736D5F7374646C696234686F73743232686F73745F646566696E65645F66756E6374696F6E733574726163653137686265666265303636316634633434356145010666696E697368071201000F5F5F737461636B5F706F696E746572090A0100072E726F64617461004D0970726F64756365727302086C616E6775616765010452757374000C70726F6365737365642D6279010572757374631D312E38392E30202832393438333838336520323032352D30382D30342900220F7461726765745F6665617475726573012B0F6D757461626C652D676C6F62616C73",
+        "Amount": "10000",
+        "CancelAfter": close_time + 2000,
+        "FinishFunction": hex::encode(&wasm),
     });
     println!("Submitting escrow create: {}", tx);
 
-    let res = handle
-        .submit(tx, from_secret)
-        .expect("Failed to submit transaction");
-    res["tx_json"]["Sequence"].as_u64().unwrap()
+    let res = handle.submit(tx, from_secret)?;
+    Ok(res["tx_json"]["Sequence"].as_u64().unwrap())
 }
 
-fn finish_escrow(handle: &RippledHandle, escrow_index: u32, from: &str, to: &str, secret: &str) {
+fn finish_escrow(
+    handle: &RippledHandle,
+    escrow_index: u32,
+    from: &str,
+    to: &str,
+    secret: &str,
+) -> anyhow::Result<()> {
     let tx = json!({
         "TransactionType": "EscrowFinish",
-        "Account": to,
         "Owner": from,
+        "Account": to,
         "OfferSequence": escrow_index,
         "ComputationAllowance": 1000000,
     });
-    let res = handle
-        .submit(tx, secret)
-        .expect("Failed to submit transaction");
+    let res = handle.submit(tx, secret)?;
     println!("Submit result: {}", res);
+    Ok(())
 }
 
 #[test]
-fn run_groth16_verify_simple() {
+fn run_groth16_verify_simple() -> anyhow::Result<()> {
     let path = build_example("groth16_verify_simple");
 
     let handle = RippledHandle::start().expect("Failed to start rippled");
     let (acc_1, secret_1) = handle.new_account().expect("Failed to create new account");
-    // let (acc_2, secret_2) = handle.new_account().expect("Failed to create new account");
 
-    let seq = create_escrow(&handle, &path, &acc_1, &secret_1, &acc_1);
+    let seq = create_escrow(&handle, &path, &acc_1, &secret_1, &acc_1)?;
     println!("Created escrow with sequence: {}", seq);
     handle.ledger_accept().expect("Failed to advance ledger");
-    finish_escrow(&handle, seq as u32, &acc_1, &acc_1, &secret_1);
 
+    finish_escrow(&handle, seq as u32, &acc_1, &acc_1, &secret_1)?;
+
+    Ok(())
     // assert!(
     //     run_func(
     //         path.to_str().unwrap().to_string(),

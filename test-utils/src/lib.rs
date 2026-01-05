@@ -123,14 +123,20 @@ impl RippledHandle {
     pub fn submit(&self, tx: serde_json::Value, secret: &str) -> anyhow::Result<serde_json::Value> {
         let r = self.call_rippled(&["submit", secret, tx.to_string().as_str()])?;
         println!("Submit result: {}", r);
-        if r["engine_result_code"].as_u64().unwrap() != 0 {
-            bail!(
-                "Transaction failed with engine_result_code {}: {}",
-                r["engine_result_code"],
-                r["engine_result_message"]
-            );
+        match r["engine_result_code"].as_u64() {
+            Some(0) => Ok(r),
+            Some(e) => {
+                bail!(
+                    "Transaction failed with engine_result_code {}: {}",
+                    e,
+                    r["engine_result_message"]
+                );
+            }
+            None => bail!(
+                "Failed to parse engine_result_code from submit result {}",
+                r
+            ),
         }
-        Ok(r)
     }
 }
 
