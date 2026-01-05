@@ -18,7 +18,7 @@
 extern crate std;
 
 use risc0_verifier_xrpl_wasm::{risc0, Proof};
-#[allow(unused)]
+#[allow(unused_imports)]
 use xrpl_wasm_stdlib;
 
 const IMAGE_ID: [u8; 32] =
