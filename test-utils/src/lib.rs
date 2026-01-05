@@ -36,7 +36,7 @@ impl RippledHandle {
                 "-v",
                 &format!("{}:/var/lib/rippled/rippled.cfg:ro", cfg_path),
                 &image,
-                "-a",
+                "--standalone",
                 "--conf",
                 "/var/lib/rippled/rippled.cfg",
             ])
