@@ -14,13 +14,11 @@ pub struct RippledHandle {
 }
 
 impl RippledHandle {
-    pub fn start() -> anyhow::Result<Self> {
+    pub fn start(cfg_path: &str) -> anyhow::Result<Self> {
         check_docker()?;
 
         let image =
             env::var("RIPPLED_DOCKER_IMAGE").unwrap_or_else(|_| "rippled:debug".to_string());
-        let cfg_path =
-            env::var("RIPPLED_CFG_PATH").expect("RIPPLED_CFG_PATH must be set to start rippled");
 
         let output = Command::new("docker")
             .args([
@@ -168,20 +166,21 @@ mod tests {
     #[test]
     #[serial]
     fn test_start_stop_rippled() {
-        let _handle = RippledHandle::start().expect("Failed to start rippled");
+        let _handle =
+            RippledHandle::start("../tests/rippled.cfg").expect("Failed to start rippled");
     }
 
     #[test]
     #[serial]
     fn test_ledger_accept() {
-        let handle = RippledHandle::start().expect("Failed to start rippled");
+        let handle = RippledHandle::start("../tests/rippled.cfg").expect("Failed to start rippled");
         handle.ledger_accept().expect("Failed to advance ledger");
     }
 
     #[test]
     #[serial]
     fn test_new_account() {
-        let handle = RippledHandle::start().expect("Failed to start rippled");
+        let handle = RippledHandle::start("../tests/rippled.cfg").expect("Failed to start rippled");
         let (account_id, secret) = handle.new_account().expect("Failed to create new account");
         println!(
             "New account created: {} with secret: {}",
@@ -192,7 +191,7 @@ mod tests {
     #[test]
     #[serial]
     fn test_ledger_submit() {
-        let handle = RippledHandle::start().expect("Failed to start rippled");
+        let handle = RippledHandle::start("../tests/rippled.cfg").expect("Failed to start rippled");
         let (acc_1, secret) = handle.new_account().expect("Failed to create new account");
         let (acc_2, _) = handle.new_account().expect("Failed to create new account");
 
