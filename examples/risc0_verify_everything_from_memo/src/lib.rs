@@ -17,7 +17,7 @@
 #[cfg(not(target_arch = "wasm32"))]
 extern crate std;
 
-use risc0_verifier_xrpl_wasm::{Proof, risc0};
+use risc0_verifier_xrpl_wasm::{risc0, Proof};
 use xrpl_wasm_stdlib::host::{Error, Result, Result::Err, Result::Ok};
 use xrpl_wasm_stdlib::{core::locator::Locator, host::get_tx_nested_field, sfield};
 
