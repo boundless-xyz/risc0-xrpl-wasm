@@ -1,4 +1,4 @@
-// Copyright 2025 RISC Zero, Inc.
+// Copyright 2026 RISC Zero, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -18,6 +18,9 @@
 extern crate std;
 
 use risc0_verifier_xrpl_wasm::groth16::{verify_groth16, Proof, PublicInputs, VerificationKey};
+#[allow(unused_imports)]
+#[allow(clippy::single_component_path_imports)]
+use xrpl_wasm_stdlib;
 
 /// Verify a known-good Groth16 proof
 #[unsafe(no_mangle)]
