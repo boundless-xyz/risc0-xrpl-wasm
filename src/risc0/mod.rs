@@ -16,12 +16,17 @@ use sha2::{Digest, Sha256};
 
 mod constants;
 
+#[cfg(feature = "std")]
+mod encode_seal;
+
 /// Generate SHA256 hash of the journal bytes. Apply this to raw bytes to obtain a journal_digest
 /// that can be passed to `risc0::verify`
 pub fn hash_journal(journal: &[u8]) -> [u8; 32] {
     Sha256::digest(journal).into()
 }
 
+#[cfg(feature = "std")]
+pub use encode_seal::encode_seal;
 pub use verify::*;
 
 mod verify {

@@ -17,8 +17,8 @@ impl RippledHandle {
     pub fn start(cfg_path: &str) -> anyhow::Result<Self> {
         check_docker()?;
 
-        let image =
-            env::var("RIPPLED_DOCKER_IMAGE").unwrap_or_else(|_| "rippled:debug".to_string());
+        let image = env::var("RIPPLED_DOCKER_IMAGE")
+            .unwrap_or_else(|_| "rippled:f615764e8a5eb100381d25fb97b10fe49a963128".to_string());
 
         let output = Command::new("docker")
             .args([
