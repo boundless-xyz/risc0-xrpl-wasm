@@ -66,6 +66,14 @@ verify_groth16(&vk, &proof, &inputs).expect("Failed to verify proof");
 
 ### Running tests
 
+First pull the rippled docker image. This this line ensures it gets the amd64 version regardless of your host platform
+
+```shell
+docker pull --platform=linux/amd64 ghcr.io/boundless-xyz/risc0-xrpl-wasm/rippled:f615764e8a5eb100381d25fb97b10fe49a963128
+```
+
+Run the tests
+
 ```shell
 cargo test
 ```
