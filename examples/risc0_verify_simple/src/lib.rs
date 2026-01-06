@@ -1,4 +1,4 @@
-// Copyright 2025 RISC Zero, Inc.
+// Copyright 2026 RISC Zero, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -19,6 +19,7 @@ extern crate std;
 
 use risc0_verifier_xrpl_wasm::{risc0, Proof};
 #[allow(unused_imports)]
+#[allow(clippy::single_component_path_imports)]
 use xrpl_wasm_stdlib;
 
 const IMAGE_ID: [u8; 32] =
