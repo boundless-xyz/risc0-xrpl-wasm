@@ -56,6 +56,26 @@ verify_groth16(&vk, &proof, &inputs).expect("Failed to verify proof");
 
 `verify` will return `Ok(())` if verification is successful or an error variant otherwise.
 
+## Building and Running Tests
+
+### Prerequisites
+
+- [Rust](https://rust-lang.org/tools/install/)
+- wasm32v1-none target `rustup target add wasm32v1-none`
+- [Docker](https://docs.docker.com/engine/install/)
+
+### Running tests
+
+```shell
+cargo test
+```
+
+Integration tests are performed against an instance of `rippled` running in docker. See the [dockerfile](./docker/rippled.Dockerfile). This defaults to the latest version built from this repo but can be overridden with the `RIPPLED_DOCKER_IMAGE` env var e.g.
+
+```shell
+RIPPLED_DOCKER_IMAGE=rippled:<some-tag> cargo test
+```
+
 ## License
 
 Licensed under the Apache-2.0 License (SPDX: Apache-2.0). See the LICENSE file for full terms.
