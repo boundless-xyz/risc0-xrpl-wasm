@@ -8,12 +8,12 @@ Note the examples below will only work in an XRPL Wasm runtime environment or si
 
 ### Verify RISC0 proof
 
-To verify a RISC0 proof:
+To verify a RISC0 proof in your XRPL Wasm function:
 
 ```rust,ignore
 use xrpl_risc0_verifier::{risc0, Proof};
 
-// first obtain seal (proof), and journal bytes from chain state or transaction memo
+// first obtain seal (proof), and/or journal bytes from chain state or transaction memo
 
 let proof = Proof::from_seal_bytes(&seal).unwrap();
 let journal_digest = risc0::hash_journal(&journal);
@@ -22,6 +22,8 @@ risc0::verify(&proof, &image_id, &journal_digest).unwrap();
 ```
 
 `verify` will return `Ok(())` if verification is successful or an error variant otherwise.
+
+See the [examples](./examples/) for further details.
 
 ### Verify arbitrary Groth16 proof
 

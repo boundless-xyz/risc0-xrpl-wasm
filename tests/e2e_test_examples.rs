@@ -137,3 +137,30 @@ fn run_risc0_verify_proof_from_memo() -> anyhow::Result<()> {
     )?;
     Ok(())
 }
+
+#[test]
+#[serial]
+fn run_risc0_memo_tests() -> anyhow::Result<()> {
+    let path = build_example("risc0_verify_everything_from_memo");
+    create_and_finish(
+        &path,
+        Some(json!([
+          {
+            "Memo": { // image ID
+              "MemoData": "81bb1005c513528e282e3c54059a7d0cd126e45a0fab86b31f1c5a6ffb6f7190",
+            }
+          },
+        {
+            "Memo": { // journal
+              "MemoData": "21000000",
+            }
+          },
+          {
+            "Memo": { // seal
+              "MemoData": "16e058bf00a7ffbef66cd3dbeee100b054db916fd1206faa864198867a5f875a122c45d9924f5b3b560514ae436cf34d57c84ec2edf15c185d97245c02c93df7262d7aace6557f54d88bb9470c0a60f082732543697e7861c06629f7e6be215f022fd4753bea8c3c112ae5ef9f546299347b40f025b41763621760c5c36f468a1a6ba514834dcca2b0ebc71b45fd00d7928da54d0e0b56c75c9c2406ce8b814317989e00eac06f65b465b9b1f56f22ced810a1f92e87a3af21340746504fe244116352c8d1a606e9974689bde10b70ecc40a6a930cfdfda8797ab7cf044c3ce82aca1329a895abe4c4df603db1b20fd52df3325a6b8b21f8a0b5261b847c9df2",
+            }
+          },
+        ])),
+    )?;
+    Ok(())
+}

@@ -21,17 +21,17 @@ use hex_literal::hex;
 // to correctly update the verifier
 include!(concat!(env!("OUT_DIR"), "/control_ids.rs"));
 
-// SHA256('risc0.Output')
+/// SHA256('risc0.Output')
 pub const OUTPUT_TAG: [u8; 32] =
     hex!("77eafeb366a78b47747de0d7bb176284085ff5564887009a5be63da32d3559d4");
-// SHA256('risc0.ReceiptClaim')
+/// SHA256('risc0.ReceiptClaim')
 pub const RECEIPT_CLAIM_TAG: [u8; 32] =
     hex!("cb1fefcd1f2d9a64975cbbbf6e161e2914434b0cbb9960b84df5d717e86b48af");
-// SHA256('risc0.SystemState(pc=0, merkle_root=0)')
+/// SHA256('risc0.SystemState(pc=0, merkle_root=0)')
 pub const SYSTEM_STATE_ZERO_DIGEST: [u8; 32] =
     hex!("a3acc27117418996340b84e5a90f3ef4c49d22c79e44aad822ec9c313e1eb8e2");
 
-// From risc0-ethereum: https://github.com/risc0/risc0-ethereum/blob/main/contracts/src/groth16/Groth16Verifier.sol
+/// From risc0-ethereum: https://github.com/risc0/risc0-ethereum/blob/main/contracts/src/groth16/Groth16Verifier.sol
 pub const RISC0_VERIFICATION_KEY: VerificationKey<5> = VerificationKey {
     vk_alpha_g1: [
         45, 77, 154, 167, 227, 2, 217, 223, 65, 116, 157, 85, 7, 148, 157, 5, 219, 234, 51, 251,

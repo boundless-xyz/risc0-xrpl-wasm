@@ -42,6 +42,7 @@ members = [
     "examples/risc0_verify_simple",
     "examples/groth16_verify_simple",
     "examples/risc0_verify_proof_from_memo",
+    "examples/risc0_verify_everything_from_memo",
 ]
 
 [workspace.dependencies]

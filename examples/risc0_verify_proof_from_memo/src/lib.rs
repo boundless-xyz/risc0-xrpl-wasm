@@ -24,8 +24,14 @@ use xrpl_wasm_stdlib::{core::locator::Locator, host::get_tx_nested_field, sfield
 
 // Commit to the image ID inside the wasm code. This constrains the zkVM program that this escrow will allow proofs from.
 // NOTE: This must be updated if you change/rebuild the RISC0 zkVM guest code
+// You typically want this so be hard-coded in the escrow to commit to a particular zkVM program
 const IMAGE_ID: [u8; 32] =
     hex_literal::hex!("81bb1005c513528e282e3c54059a7d0cd126e45a0fab86b31f1c5a6ffb6f7190");
+
+// The expected journal contents from the RISC0 zkVM program.
+// This can be either hard-coded in the wasm code (as done here)
+// or read from Memo or chain data depending on your use case.
+const JOURNAL: [u8; 4] = 33u32.to_le_bytes();
 
 /// Verify a RISC0 proof retrieved from the data of the first memo in the transaction
 #[unsafe(no_mangle)]
@@ -35,8 +41,7 @@ pub extern "C" fn finish() -> i32 {
 
     let proof = Proof::from_seal_bytes(&seal).unwrap();
 
-    let journal = 33u32.to_le_bytes();
-    let journal_digest = risc0::hash_journal(&journal);
+    let journal_digest = risc0::hash_journal(&JOURNAL);
 
     risc0::verify(&proof, &IMAGE_ID, &journal_digest).unwrap();
 

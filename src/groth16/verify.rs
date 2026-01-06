@@ -58,3 +58,59 @@ fn verify_scalar_in_field(x: &[u8; 32]) -> Result<()> {
         Ok(())
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_verify_scalar_in_field() {
+        let zero = [0u8; 32];
+        assert!(
+            verify_scalar_in_field(&zero).is_ok(),
+            "Zero should be a valid field element"
+        );
+
+        let one = {
+            let mut arr = [0u8; 32];
+            arr[31] = 1;
+            arr
+        };
+        assert!(
+            verify_scalar_in_field(&one).is_ok(),
+            "One should be a valid field element"
+        );
+
+        let max_valid = {
+            let mut arr = BASE_FIELD_MODULUS_Q;
+            // Subtract 1 from the last byte to make it less than modulus
+            arr[31] -= 1;
+            arr
+        };
+        assert!(
+            verify_scalar_in_field(&max_valid).is_ok(),
+            "Value below modulus should be valid"
+        );
+
+        assert!(
+            verify_scalar_in_field(&BASE_FIELD_MODULUS_Q).is_err(),
+            "Modulus itself should be rejected"
+        );
+
+        let modulus_plus_one = {
+            let mut arr = BASE_FIELD_MODULUS_Q;
+            arr[31] += 1; // Note: OK to overflow, just for testing
+            arr
+        };
+        assert!(
+            verify_scalar_in_field(&modulus_plus_one).is_err(),
+            "Value above modulus should be rejected"
+        );
+
+        let max_bytes = [0xFF; 32];
+        assert!(
+            verify_scalar_in_field(&max_bytes).is_err(),
+            "Maximum byte value should be rejected"
+        );
+    }
+}
