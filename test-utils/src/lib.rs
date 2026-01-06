@@ -32,7 +32,7 @@ impl RippledHandle {
         check_docker()?;
 
         let image = env::var("RIPPLED_DOCKER_IMAGE")
-            .unwrap_or_else(|_| "rippled:f615764e8a5eb100381d25fb97b10fe49a963128".to_string());
+            .unwrap_or_else(|_| "ghcr.io/boundless-xyz/risc0-xrpl-wasm/rippled:f615764e8a5eb100381d25fb97b10fe49a963128".to_string());
 
         let output = Command::new("docker")
             .args([

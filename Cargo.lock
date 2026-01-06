@@ -1228,6 +1228,15 @@ dependencies = [
 ]
 
 [[package]]
+name = "risc0_verify_everything_from_memo"
+version = "0.1.0"
+dependencies = [
+ "hex-literal 1.1.0",
+ "risc0-verifier-xrpl-wasm",
+ "xrpl-wasm-stdlib",
+]
+
+[[package]]
 name = "risc0_verify_proof_from_memo"
 version = "0.1.0"
 dependencies = [

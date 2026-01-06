@@ -22,6 +22,7 @@ env:
   RUST_BACKTRACE: "1"
   RISC0_RUST_TOOLCHAIN_VERSION: 1.88.0
   RISC0_VERSION: 3.0.3
+  RIPPLED_DOCKER_IMAGE: "ghcr.io/boundless-xyz/risc0-xrpl-wasm/rippled:f615764e8a5eb100381d25fb97b10fe49a963128"
 
 jobs:
   lint:

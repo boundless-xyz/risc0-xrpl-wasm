@@ -1,0 +1,12 @@
+[package]
+name = "risc0_verify_everything_from_memo"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+hex-literal = "1.1.0"
+risc0-verifier-xrpl-wasm = { workspace = true, default-features = false }
+xrpl-wasm-stdlib = { workspace = true }

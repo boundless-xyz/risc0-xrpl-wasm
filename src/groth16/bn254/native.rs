@@ -15,14 +15,14 @@
 use crate::groth16::bn254::{G1Point, Pair, Scalar};
 
 pub(crate) fn add_g1(_p1: G1Point, _p2: G1Point) -> G1Point {
-    todo!()
+    unimplemented!();
 }
 
 pub(crate) fn mult_g1(_p1: G1Point, _scalar: Scalar) -> G1Point {
-    todo!()
+    unimplemented!();
 }
 
 /// Evaluates prod [ e(pairs[i].0, pairs[i].1) == 1 ]
 pub(crate) fn pairing_check(_pairs: &[Pair]) -> bool {
-    todo!()
+    unimplemented!();
 }
