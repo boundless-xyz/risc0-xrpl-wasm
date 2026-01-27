@@ -12,17 +12,18 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::Result;
 use crate::groth16::bn254::{G1Point, Pair, Scalar};
 
-pub(crate) fn add_g1(_p1: G1Point, _p2: G1Point) -> G1Point {
+pub(crate) fn add_g1(_p1: G1Point, _p2: G1Point) -> Result<G1Point> {
     unimplemented!();
 }
 
-pub(crate) fn mult_g1(_p1: G1Point, _scalar: Scalar) -> G1Point {
+pub(crate) fn mult_g1(_p1: G1Point, _scalar: Scalar) -> Result<G1Point> {
     unimplemented!();
 }
 
 /// Evaluates prod [ e(pairs[i].0, pairs[i].1) == 1 ]
-pub(crate) fn pairing_check(_pairs: &[Pair]) -> bool {
+pub(crate) fn pairing_check(_pairs: &[Pair]) -> Result<bool> {
     unimplemented!();
 }

@@ -13,10 +13,11 @@
 // limitations under the License.
 
 use crate::groth16::bn254::{G1_LEN, G1Point, G2_LEN, Pair, Scalar};
+use crate::{Error, Result};
 
-pub(crate) fn add_g1(p1: G1Point, p2: G1Point) -> G1Point {
+pub(crate) fn add_g1(p1: G1Point, p2: G1Point) -> Result<G1Point> {
     let mut add_res = [0u8; G1_LEN];
-    unsafe {
+    let rtrn = unsafe {
         bn254_add_helper(
             p1.as_ptr(),
             p1.len(),
@@ -24,14 +25,15 @@ pub(crate) fn add_g1(p1: G1Point, p2: G1Point) -> G1Point {
             p2.len(),
             add_res.as_mut_ptr(),
             add_res.len(),
-        );
-    }
-    add_res
+        )
+    };
+    handle_result(rtrn, G1_LEN)?;
+    Ok(add_res)
 }
 
-pub(crate) fn mult_g1(p1: G1Point, scalar: Scalar) -> G1Point {
+pub(crate) fn mult_g1(p1: G1Point, scalar: Scalar) -> Result<G1Point> {
     let mut mul_res = [0u8; G1_LEN];
-    unsafe {
+    let rtrn = unsafe {
         bn254_mul_helper(
             p1.as_ptr(),
             p1.len(),
@@ -39,17 +41,34 @@ pub(crate) fn mult_g1(p1: G1Point, scalar: Scalar) -> G1Point {
             scalar.len(),
             mul_res.as_mut_ptr(),
             mul_res.len(),
-        );
-    }
-    mul_res
+        )
+    };
+    handle_result(rtrn, G1_LEN)?;
+    Ok(mul_res)
 }
 
 /// Evaluates prod [ e(pairs[i].0, pairs[i].1) == 1 ]
-pub(crate) fn pairing_check(pairs: &[Pair]) -> bool {
-    let result = unsafe {
+pub(crate) fn pairing_check(pairs: &[Pair]) -> Result<bool> {
+    let rtrn = unsafe {
         bn254_pairing_helper(pairs.as_ptr() as *const u8, pairs.len() * (G1_LEN + G2_LEN))
     };
-    result == 1
+    match rtrn {
+        1 => Ok(true),
+        -1 => Ok(false),
+        e => Err(Error::HostErrorCode(e)),
+    }
+}
+
+/// Helper function to handle return codes from the add and mult precompiles
+/// Returns Ok with number of bytes written on success, or Err with appropriate Error on failure
+fn handle_result(rtrn: i32, expected_bytes: usize) -> Result<()> {
+    match rtrn {
+        r if r < 0 => return Err(Error::HostErrorCode(r)),
+        r if r as usize == expected_bytes => Ok(()),
+        _ => {
+            return Err(Error::UnexpectedByteLength);
+        }
+    }
 }
 
 #[allow(unused)]
