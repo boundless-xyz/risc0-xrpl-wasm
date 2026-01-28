@@ -33,7 +33,7 @@ pub fn verify_groth16<const N_PUBLIC: usize>(
             .zip(vk.vk_ic.iter())
             .try_fold(vk.vk_ic_0, |vkx, (input, ic)| {
                 verify_scalar_in_field(input)?;
-                Ok(bn254::add_g1(vkx, bn254::mult_g1(*ic, *input)))
+                bn254::add_g1(vkx, bn254::mult_g1(*ic, *input)?)
             })?;
 
     // use ec_pairing_check_helper_bn254 to check
@@ -43,7 +43,7 @@ pub fn verify_groth16<const N_PUBLIC: usize>(
         Pair(vk.vk_alpha_g1, vk.vk_beta_g2),
         Pair(vkx, vk.vk_gamma_g2),
         Pair(proof.pi_c, vk.vk_delta_g2),
-    ]) {
+    ])? {
         Ok(())
     } else {
         Err(Error::PairingCheckFailed)

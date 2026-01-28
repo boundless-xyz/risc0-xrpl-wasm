@@ -30,6 +30,8 @@ pub enum Error {
     ArithmeticError,
     PairingCheckFailed,
     ScalarNotInField,
+    HostErrorCode(i32),
+    UnexpectedByteLength,
 }
 
 pub type Result<T> = core::result::Result<T, Error>;
