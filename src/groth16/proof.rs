@@ -26,11 +26,15 @@ pub struct Proof {
 }
 
 impl Proof {
+    /// Create a Proof from raw bytes
+    /// Note this does not perform any checks that the points are valid curve points.
+    /// Invalid points will be caught during verification.
     pub fn from_bytes(bytes: &[u8]) -> Result<Self> {
         if bytes.len() != 256 {
             return Err(Error::InvalidProof);
         }
         Ok(Proof {
+            // unwraps are safe here as the length has already been checked
             neg_pi_a: bytes[..G1_LEN].try_into().unwrap(),
             pi_b: bytes[G1_LEN..G1_LEN + G2_LEN].try_into().unwrap(),
             pi_c: bytes[G1_LEN + G2_LEN..].try_into().unwrap(),
