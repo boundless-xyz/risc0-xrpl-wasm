@@ -626,7 +626,7 @@ name = "groth16_verify_simple"
 version = "0.1.0"
 dependencies = [
  "risc0-verifier-xrpl-wasm",
- "xrpl-wasm-stdlib 0.7.1 (git+https://github.com/ripple/xrpl-wasm-stdlib?tag=v0.7.1)",
+ "xrpl-wasm-stdlib",
 ]
 
 [[package]]
@@ -1144,7 +1144,7 @@ dependencies = [
  "serial_test",
  "sha2",
  "test-utils",
- "xrpl-wasm-stdlib 0.7.1 (registry+https://github.com/rust-lang/crates.io-index)",
+ "xrpl-wasm-stdlib",
 ]
 
 [[package]]
@@ -1233,7 +1233,7 @@ version = "0.1.0"
 dependencies = [
  "hex-literal 1.1.0",
  "risc0-verifier-xrpl-wasm",
- "xrpl-wasm-stdlib 0.7.1 (git+https://github.com/ripple/xrpl-wasm-stdlib?tag=v0.7.1)",
+ "xrpl-wasm-stdlib",
 ]
 
 [[package]]
@@ -1242,7 +1242,7 @@ version = "0.1.0"
 dependencies = [
  "hex-literal 1.1.0",
  "risc0-verifier-xrpl-wasm",
- "xrpl-wasm-stdlib 0.7.1 (git+https://github.com/ripple/xrpl-wasm-stdlib?tag=v0.7.1)",
+ "xrpl-wasm-stdlib",
 ]
 
 [[package]]
@@ -1251,7 +1251,7 @@ version = "0.1.0"
 dependencies = [
  "hex-literal 1.1.0",
  "risc0-verifier-xrpl-wasm",
- "xrpl-wasm-stdlib 0.7.1 (git+https://github.com/ripple/xrpl-wasm-stdlib?tag=v0.7.1)",
+ "xrpl-wasm-stdlib",
 ]
 
 [[package]]
@@ -1645,19 +1645,6 @@ checksum = "f17a85883d4e6d00e8a97c586de764dabcc06133f7f1d55dce5cdc070ad7fe59"
 [[package]]
 name = "xrpl-address-macro"
 version = "0.1.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "e6949e3ed600dc9fd6a0bb6f4994fdd9e51cd88cf0a0c17b66d523e5e68d88b1"
-dependencies = [
- "bs58",
- "proc-macro2",
- "quote",
- "sha2",
- "syn 2.0.111",
-]
-
-[[package]]
-name = "xrpl-address-macro"
-version = "0.1.0"
 source = "git+https://github.com/ripple/xrpl-wasm-stdlib?tag=v0.7.1#b2c6db11aa0b7c3cd32815c6cf8df048b4e60aa7"
 dependencies = [
  "bs58",
@@ -1669,18 +1656,9 @@ dependencies = [
 [[package]]
 name = "xrpl-wasm-stdlib"
 version = "0.7.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "9f6cf974912fa3d503a2929a72b673e35ceee9cdbd0092df1df27cdba17d394c"
-dependencies = [
- "xrpl-address-macro 0.1.0 (registry+https://github.com/rust-lang/crates.io-index)",
-]
-
-[[package]]
-name = "xrpl-wasm-stdlib"
-version = "0.7.1"
 source = "git+https://github.com/ripple/xrpl-wasm-stdlib?tag=v0.7.1#b2c6db11aa0b7c3cd32815c6cf8df048b4e60aa7"
 dependencies = [
- "xrpl-address-macro 0.1.0 (git+https://github.com/ripple/xrpl-wasm-stdlib?tag=v0.7.1)",
+ "xrpl-address-macro",
 ]
 
 [[package]]
