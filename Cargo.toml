@@ -15,14 +15,14 @@ hex-literal = "1.1.0"
 sha2 = { version = "0.10", default-features = false }
 
 [target.'cfg(target_arch = "wasm32")'.dependencies]
-xrpl-wasm-stdlib = { git = "https://github.com/ripple/xrpl-wasm-stdlib", tag = "v0.7.1" }
+xrpl-wasm-stdlib = { version = "0.7.1" }
 
 [target.'cfg(not(target_arch = "wasm32"))'.dependencies]
 anyhow = { workspace = true }
-risc0-zkvm = { version = "3.0.4", default-features = false }
+risc0-zkvm = { version = "3.0.5", default-features = false }
 
 [build-dependencies]
-risc0-circuit-recursion = { version = "4.0.2", default-features = false }
+risc0-circuit-recursion = { version = "4.0.4", default-features = false }
 
 [dev-dependencies]
 test-utils = { path = "test-utils" }
