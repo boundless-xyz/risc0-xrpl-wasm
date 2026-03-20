@@ -93,3 +93,15 @@ jobs:
         env:
           RUSTFLAGS: "-Dwarnings"
         run: cargo test --locked
+
+  publish-dry-run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout code
+        uses: actions/checkout@v4
+
+      - name: install rust
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: cargo publish dry run
+        run: cargo publish --dry-run

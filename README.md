@@ -4,7 +4,7 @@ This crate implements a stateless RISC Zero proof verifier, and generic Groth16 
 
 ## Usage
 
-Note the examples below will only work in an XRPL Wasm runtime environment or similar environment that provides host functions for BN254 operations. This currently requires a special testnet or a local instance built from https://github.com/XRPLF/rippled/tree/zhang/groth16. It is also possible to use the docker image included in this repo for testing (see below)
+Note the examples below will only work in an XRPL Wasm runtime environment or similar environment that provides host functions for BN254 operations. This currently requires a special testnet or a local instance built from [this branch](https://github.com/XRPLF/rippled/tree/zhang/groth16). It is also possible to use the docker image included in this repo for testing (see below)
 
 ### Verify RISC0 proof
 
