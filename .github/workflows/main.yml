@@ -93,3 +93,22 @@ jobs:
         env:
           RUSTFLAGS: "-Dwarnings"
         run: cargo test --locked
+
+  publish-dry-run:
+    runs-on: [ self-hosted, prod, "${{ matrix.os }}", "${{ matrix.arch }}", "${{ matrix.device }}" ]
+    strategy:
+      matrix:
+        include:
+          - os: Linux
+            arch: X64
+            feature: default
+            device: cpu
+    steps:
+      - name: checkout code
+        uses: actions/checkout@v4
+
+      - name: install rust
+        uses: risc0/risc0/.github/actions/rustup@main
+
+      - name: cargo publish dry run
+        run: cargo publish --dry-run

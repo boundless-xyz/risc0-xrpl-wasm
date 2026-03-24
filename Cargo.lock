@@ -695,9 +695,9 @@ checksum = "4a5f13b858c8d314ee3e8f639011f7ccefe71f97f96e50151fb991f267928e2c"
 
 [[package]]
 name = "keccak"
-version = "0.1.5"
+version = "0.1.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "ecc2af9a1119c51f12a14607e783cb977bde58bc069ff0c3da1095e635d70654"
+checksum = "cb26cec98cce3a3d96cbb7bced3c4b16e3d13f27ec56dbd62cbc8f39cfb9d653"
 dependencies = [
  "cpufeatures",
 ]
@@ -1643,9 +1643,10 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "f17a85883d4e6d00e8a97c586de764dabcc06133f7f1d55dce5cdc070ad7fe59"
 
 [[package]]
-name = "xrpl-address-macro"
+name = "xrpl-macros"
 version = "0.1.0"
-source = "git+https://github.com/ripple/xrpl-wasm-stdlib?tag=v0.7.1#b2c6db11aa0b7c3cd32815c6cf8df048b4e60aa7"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "275b87d56c502fb6585e991c042a9505970bdf3728006136a32693becf5ae385"
 dependencies = [
  "bs58",
  "quote",
@@ -1655,10 +1656,11 @@ dependencies = [
 
 [[package]]
 name = "xrpl-wasm-stdlib"
-version = "0.7.1"
-source = "git+https://github.com/ripple/xrpl-wasm-stdlib?tag=v0.7.1#b2c6db11aa0b7c3cd32815c6cf8df048b4e60aa7"
+version = "0.8.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "cba90fbb979ca99467725f47c05362de3fbd31cabe032fc477373e93f4375551"
 dependencies = [
- "xrpl-address-macro",
+ "xrpl-macros",
 ]
 
 [[package]]
