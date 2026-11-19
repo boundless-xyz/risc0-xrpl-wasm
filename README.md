@@ -1,3 +1,5 @@
+> **Archived:** Historical RISC Zero verifier integration for XRPL WASM. Existing releases remain available.
+
 # RISC Zero Verifier for XRPL Wasm
 
 This crate implements a stateless RISC Zero proof verifier, and generic Groth16 verifier to be used within the XRPL Wasm runtime
